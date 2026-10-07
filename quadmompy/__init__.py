@@ -34,7 +34,21 @@ from .core import *
 from . import qbmm
 from . import moments
 from . import equations
-from ._version import __version__, __version_tuple__
+
+# _version.py is written by setuptools_scm when the package is built and is not
+# tracked, so a plain source checkout has to fall back to the metadata of the
+# installed distribution.
+try:
+    from ._version import __version__, __version_tuple__
+except ModuleNotFoundError:
+    from importlib.metadata import PackageNotFoundError, version
+
+    try:
+        __version__ = version("quadmompy")
+    except PackageNotFoundError:
+        __version__ = "unknown"
+    __version_tuple__ = tuple([int(p) if p.isdigit() else p \
+                               for p in __version__.split(".")])
 
 
 __all__ = [ \
