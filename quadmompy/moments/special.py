@@ -162,7 +162,9 @@ def normal_moments(n, mu, sigma, central=False, absolute=False):
         # So the non-central moments are computed by calculation of the central moments and
         # subsequent linear moment transformation.
         mom = np.zeros(n)
-        mom[::2] = sigma**k[::2]*factorial2(k[::2] - 1)
+        # The k = 0 term needs the convention (-1)!! = 1, but scipy's factorial2
+        # maps negative input to 0.
+        mom[::2] = sigma**k[::2]*factorial2(np.maximum(k[::2] - 1, 0))
         if central:
             return mom
         return linear_transform(mom, 1, mu)

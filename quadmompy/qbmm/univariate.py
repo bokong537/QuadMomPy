@@ -1100,7 +1100,7 @@ class GaussianEqmom(ExtendedQmom):
             sigma_0 = np.roots([2., 0., eta - 3*e**2, q**2])
 
             # Real root is unique, see [Chalons_2010]
-            sigma_0 = float(sigma_0[np.isclose(sigma_0.imag, 0.)].real)
+            sigma_0 = float(sigma_0[np.isclose(sigma_0.imag, 0.)].real[0])
 
             return (sigma_0 + e)**0.5
         return None
