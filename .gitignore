@@ -170,6 +170,8 @@ cython_debug/
 
 # Ignore output of example scripts
 examples/jcp_466_111363/*/mom.dat
+examples/cqmom_bivariate/quad_out.dat
+examples/cqmom_bivariate/mom_err.dat
 
 # Automatically generated version file
 quadmompy/_version.py
